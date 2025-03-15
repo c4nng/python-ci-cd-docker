@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -18,6 +20,9 @@ jobs:
         with:
           python-version: '3.9'  # Python versiyonunuzu burada belirtebilirsiniz
 
+      - name: Set Python path
+        run: echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV
+            
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip

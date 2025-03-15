@@ -10,6 +10,9 @@ COPY src/requirements.txt /app/requirements.txt
 # Bağımlılıkları yüklüyoruz
 RUN pip install --no-cache-dir -r requirements.txt
 
+# src dizinini Python modül yolu olarak ekliyoruz
+ENV PYTHONPATH=/app/src:$PYTHONPATH
+
 # Python kodlarını src dizininden kopyalıyoruz
 COPY src/ /app/
 
