@@ -3,35 +3,33 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Hangi branch'e push yapılacaksa o
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'  # Python versiyonunuzu burada belirtebilirsiniz
+          python-version: '3.9'
 
       - name: Set Python path
         run: echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV
-            
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r src/requirements.txt  # requirements.txt'in doğru yolu
+          pip install -r src/requirements.txt
 
       - name: Run tests
         run: |
-          pytest  # Testlerinizi burada çalıştırıyorsunuz
-
+          pytest tests/
+          
       - name: Build Docker image
         run: |
           docker build -t c4nng/my-python-app:latest .
@@ -46,7 +44,7 @@ jobs:
         run: |
           docker push c4nng/my-python-app:latest
 
-      - name: Send Telegram Notification (Optional)
+      - name: Send Telegram Notification
         run: |
           curl -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage \
             -d chat_id=${{ secrets.TELEGRAM_CHAT_ID }} \
