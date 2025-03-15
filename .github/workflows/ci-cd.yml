@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Projenizin bağımlılıkları burada yüklenecek
+          pip install -r src/requirements.txt  # requirements.txt'in tam yolunu belirtiyoruz
 
       - name: Run tests
         run: |
