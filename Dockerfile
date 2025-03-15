@@ -1,17 +1,17 @@
-# Python'ın temel imajını kullanıyoruz
-FROM python:3.9-slim
+# Python image'ı kullanıyoruz
+FROM python:3.9
 
-# Çalışma dizinini oluşturuyoruz
-WORKDIR /src
+# Çalışma dizini oluşturuyoruz
+WORKDIR /app
 
-# Gereksinim dosyasını kopyalıyoruz
-COPY requirements.txt /src/
+# requirements.txt'i src dizininden kopyalıyoruz
+COPY src/requirements.txt /app/requirements.txt
 
 # Bağımlılıkları yüklüyoruz
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Uygulama kodunu kopyalıyoruz
-COPY . /src/
+# Python kodlarını src dizininden kopyalıyoruz
+COPY src/ /app/
 
-# Uygulamayı başlatıyoruz
+# Uygulamayı çalıştırıyoruz
 CMD ["python", "app.py"]

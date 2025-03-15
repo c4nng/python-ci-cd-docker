@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # veya hangi branch'e push yapılacaksa o
+      - main  # Hangi branch'e push yapılacaksa o
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r src/requirements.txt  # requirements.txt'in tam yolunu belirtiyoruz
+          pip install -r src/requirements.txt  # requirements.txt'in doğru yolu
 
       - name: Run tests
         run: |
